@@ -1,7 +1,7 @@
 /* Put your css in here */
 form{margin-left: 120px;}
 body{font-family: "Segoe UI",helvetica,arial,sans-serif;}
-body{background-image:url('https://basecamp.global.ssl.fastly.net/assets/wallpapers/paper-d58343f25c9bf8b2b0dcd72e25bf7644.jpg');}
+body{background-image:url('/assets/background.jpg');}
 h2{font-weight:normal;}
 .indent{margin-left:120px;}
 .inline{margin-left: 105px;}
