@@ -1,0 +1,45 @@
+.view-project, .view-list, .view-todo{
+	display:block;
+}
+
+.edit-project, .edit-list, .edit-todo{
+	display:none;
+}
+
+.editing-project  .view-project,.editing-list  .view-list,.editing-todo  .view-todo  {
+	display:none;
+}
+.editing-project  .edit-project, .editing-list  .edit-list, .editing-todo .edit-todo {
+	display:block;
+}
+
+.add-project, .add-list, .add-todo{
+	display:none;
+}
+
+.adding  .view-project, .adding  .view-list,.adding  .view-todo {
+	display:none;
+}
+.adding  .add-project, .adding  .add-list, .adding  .add-todo {
+	display:block;
+}
+
+
+
+#lists, #projects{
+	margin: 30px;
+}
+
+#lists li, #projects li{
+	margin: 10px;	
+	border-bottom: 1px solid #aaa;
+}
+
+.todo-list{
+	margin: 30px;
+}
+
+#lists .todo-list li{
+	margin: 10px;	
+	border-bottom: 0px;
+}

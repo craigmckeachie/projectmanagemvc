@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/site.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="content" class="container">
+</div>
+
+
+</div>
+
+<script type="text/template" id="projects-template">
+
+<h1><a href="/">Projects</a></h1>
+<div id="add-project" class="row">
+</div>
+
+<br class="clearfix" />
+<hr  />
+<div class="row">
+
+<ul id="projects" class="list-unstyled">	
+</ul>
+
+</script>
+
+<script type="text/template"  id="project-add-template">
+	
+	<div class="col-md-6 view-project">	
+	<a class="btn btn-primary add pull-right" href="#project/add" >Add Project</a>
+	</div>
+	
+	<div class="col-md-6">
+	<form class="add-project form-vertical well">
+		<div class="form-group">
+		<label>Project Name</label>
+		<input class="name form-control" type="text" placeholder="enter project name" value='<%=name%>' />
+		</div>
+		
+		<div class="form-group">
+		<label>Project Description</label>
+		<textarea class="description form-control" rows="6" placeholder="enter description here"><%=description%></textarea>
+		</div>
+		<button class="project-save btn btn-primary">Save</button>
+		<a class="cancel" href="#projects">cancel</a>
+	</form>
+	</div>
+	
+
+</script>
+
+
+<script type="text/template" id="project-template">
+		
+	<div class="col-md-6 view-project">	
+	<a href="#project/<%=id%>/lists" ><%=name%></a> 
+	<a class="edit" href="#project/edit/<%=id%>">edit</a>
+	<a class="remove" href="#project/remove">remove</a>
+	</div>
+	
+	<div class="col-md-6" >	
+	<form class="edit-project form-vertical well">
+		<div class="form-group">
+		<label>Project Name</label>
+		<input class="name form-control" type="text" placeholder="enter project name" value='<%=name%>' />
+		</div>
+		
+		<div class="form-group">
+		<label>Project Description</label>
+		<textarea class="description form-control" rows="6" placeholder="enter description"><%=description%></textarea>
+		</div>
+		
+		<div class="form-group pull-right">
+		<button class="project-save btn btn-primary">Save</button>
+		<a class="cancel" href="#project/view">cancel</a>
+		</div>
+		<br class="clearfix"/>
+	</form>
+	</div>
+	
+	<div class="add-todo-container" class="row">
+	
+	</div>
+	
+	<ul class="todo-project project-unstyled col-md-6">
+		
+	</ul>
+	
+		
+</script>
+
+
+<!---- -->
+<script type="text/template" id="lists-template">
+<h3> <%= name %> </h3>
+<h1><a href="/">Lists</a></h1>
+<div id="add-list" class="row">
+</div>
+
+<br class="clearfix" />
+<hr  />
+<div class="row">
+
+<ul id="lists" class="list-unstyled">	
+</ul>
+
+</script>
+
+<script type="text/template"  id="list-add-template">
+	
+	
+	<div class="col-md-6 view-list">	
+	<a class="btn btn-primary add pull-right" href="#project/<%= projectid%>/list/add" >Add List</a>
+	</div>
+	
+	<div class="col-md-6">
+	<form class="add-list form-vertical well">
+		<div class="form-group">
+		<label>List Name</label>
+		<input class="name form-control" type="text" placeholder="enter list name" value='<%=name%>' />
+		</div>
+		
+		<div class="form-group">
+		<label>List Description</label>
+		<textarea class="description form-control" rows="6" placeholder="enter description here"><%=description%></textarea>
+		</div>
+		<button class="list-save btn btn-primary">Save</button>
+		<a class="cancel" href="#project/<%=projectid%>/lists">cancel</a>
+	</form>
+	</div>
+	
+
+</script>
+
+
+<script type="text/template" id="list-template">
+		
+	<div class="col-md-6 view-list">	
+	<%=name%> 
+	<a class="edit" href="#project/<%=projectid%>/list/edit/<%=id%>">edit</a>
+	<a class="remove" href="#project/<%=projectid%>/lists/remove">remove</a>
+	</div>
+	
+	<div class="col-md-6" >	
+	<form class="edit-list form-vertical well">
+		<div class="form-group">
+		<label>List Name</label>
+		<input class="name form-control" type="text" placeholder="enter list name" value='<%=name%>' />
+		</div>
+		
+		<div class="form-group">
+		<label>List Description</label>
+		<textarea class="description form-control" rows="6" placeholder="enter description"><%=description%></textarea>
+		</div>
+		
+		<div class="form-group pull-right">
+		<button class="list-save btn btn-primary">Save</button>
+		<a class="cancel" href="#project/<%=projectid%>/list/view">cancel</a>
+		</div>
+		<br class="clearfix"/>
+	</form>
+	</div>
+	
+	<div class="add-todo-container" class="row">
+	
+	</div>
+	
+	<ul class="todo-list list-unstyled col-md-6">
+		
+	</ul>
+	
+		
+</script>
+
+<script type="text/template" id="todo-add-template">
+		
+	<div class="col-md-6 view-todo">	
+		<a class="btn btn-primary add pull-right" href='#todo/add/<%=list.id%>' >Add Item</a>
+	</div>
+	
+	<div class="col-md-6" >
+	
+		<form class="add-todo form-vertical well">
+		
+		
+		<div class="form-group">		
+		<textarea class="description form-control" rows="6" placeholder="what needs to get done"><%=description%></textarea>
+		</div>
+		
+		<div class="form-group pull-right">
+		<button class="todo-save btn btn-primary">Save</button>
+		<a class="cancel" href="#/todo/view">cancel</a>
+		</div>
+		<br class="clearfix"/>
+	</form>
+	
+	</div>
+		
+</script>
+
+<script type="text/template" id="todo-template">
+		
+	<div class="col-md-6 view-todo">
+		
+	<input class="completed " type="checkbox"  <%= completed ? "checked":"" %> />	
+	<%=description%> 
+	<a class="edit" href="#/todo/edit/<%=id%>">edit</a>
+	<a class="remove" href="#/todo/remove">remove</a>
+	</div>
+	
+	<div class="col-md-10" >	
+	
+	
+	<form class="edit-todo form-vertical well">
+		
+		
+		<div class="form-group">		
+		<textarea class="description form-control" rows="6" placeholder="what needs to get done"><%=description%></textarea>
+		</div>
+		
+		<div class="form-group pull-right">
+		<button class="todo-save btn btn-primary">Save</button>
+		<a class="cancel" href="#/todo/view">cancel</a>
+		</div>
+		<br class="clearfix"/>
+	</form>
+	</div>
+		
+</script>
+
+
+<script src="/js/libs/jquery/jquery-1.10.2.min.js"></script>
+<script src="/js/libs/underscore/underscore-min.js"></script>
+<script src="/js/libs/backbone/backbone.js"></script>
+<script type="text/javascript" src="/js/libs/backbone/backbone.localStorage.js"></script>
+<script src="js/models/user.js"></script>
+<script src="js/collections/users.js"></script>
+<script src="js/models/todo.js"></script>
+<script src="js/collections/todos.js"></script>
+<script src="js/models/list.js"></script>
+<script src="js/collections/lists.js"></script>
+<script src="js/models/project.js"></script>
+<script src="js/collections/projects.js"></script>
+<script src="js/views/todo-view.js"></script>
+<script src="js/views/todo-add-view.js"></script>
+<script src="js/views/list-view.js"></script>
+<script src="js/views/list-add-view.js"></script>
+<script src="js/views/lists-view.js"></script>
+<script src="js/views/project-view.js"></script>
+<script src="js/views/project-add-view.js"></script>
+<script src="js/views/projects-view.js"></script>
+<script src="js/app.js"></script>
+<script src="js/routers/router.js"></script>
+</body>
+</html>
