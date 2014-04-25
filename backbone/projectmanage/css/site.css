@@ -25,7 +25,6 @@
 }
 
 
-
 #lists, #projects{
 	margin: 30px;
 }
@@ -43,3 +42,47 @@
 	margin: 10px;	
 	border-bottom: 0px;
 }
+
+form{margin-left: 120px;}
+body{font-family: "Segoe UI",helvetica,arial,sans-serif;}
+body{background-image:url('/assets/background.jpg');}
+h2{font-weight:normal;}
+h1,h2,h3,h4{color:black;}
+
+div.sheet {
+padding: 30px 30px 30px 30px;
+}
+
+div.sheet {
+min-height: 480px;
+background: #fff;
+-webkit-box-shadow: 0 0 6px rgba(0,0,0,0.3);
+-moz-box-shadow: 0 0 6px rgba(0,0,0,0.3);
+box-shadow: 0 0 6px rgba(0,0,0,0.3);
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+
+.project-card {
+width: 210px;
+height: 235px;
+float: left;
+margin: 0 20px 20px 0;
+position: relative;
+text-align: left;
+background: #fff;
+padding: 15px;
+text-rendering: optimizeLegibility;
+text-shadow: none;
+-webkit-box-shadow: 0 0 6px rgba(0,0,0,0.3);
+-moz-box-shadow: 0 0 6px rgba(0,0,0,0.3);
+box-shadow: 0 0 6px rgba(0,0,0,0.3);
+border-radius: 3px;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+}
+
+
+
+

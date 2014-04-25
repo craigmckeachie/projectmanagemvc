@@ -4,7 +4,7 @@ var app = app || {};
 	app.ProjectView = Backbone.View.extend({
 		template: _.template($("#project-template").html()),
 		tagName: "li",
-		className: "row",
+		className: "project-card",
 		events:{			
 			"click .cancel":"cancel",
 			"click  .project-save":"save",

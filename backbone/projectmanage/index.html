@@ -8,7 +8,12 @@
 </head>
 <body>
 
-<div id="content" class="container">
+<div id="header">
+<br />
+</div>
+
+<div id="content" class="container sheet">
+
 </div>
 
 
@@ -57,10 +62,13 @@
 
 <script type="text/template" id="project-template">
 		
-	<div class="col-md-6 view-project">	
-	<a href="#project/<%=id%>/lists" ><%=name%></a> 
+	<div class="col-md-16 view-project">	
+	<h3><a href="#project/<%=id%>/lists" ><%=name%></a></h3>
+	<p><%=description%></p>
+	<!--
 	<a class="edit" href="#project/edit/<%=id%>">edit</a>
 	<a class="remove" href="#project/remove">remove</a>
+	-->
 	</div>
 	
 	<div class="col-md-6" >	
@@ -95,9 +103,34 @@
 </script>
 
 
-<!---- -->
 <script type="text/template" id="lists-template">
+<div id="project-container">
 <h3> <%= name %> </h3>
+<p><%=description%></p>
+</div>
+
+<div class="col-md-6" >	
+<form class="edit-project form-vertical well">
+	<div class="form-group">
+	<label>Project Name</label>
+	<input class="name form-control" type="text" placeholder="enter project name" value='<%=name%>' />
+	</div>
+	
+	<div class="form-group">
+	<label>Project Description</label>
+	<textarea class="description form-control" rows="6" placeholder="enter description"><%=description%></textarea>
+	</div>
+	
+	<div class="form-group pull-right">
+	<button class="project-save btn btn-primary">Save</button>
+	<a class="cancel" >cancel</a>
+	</div>
+	<br class="clearfix"/>
+</form>
+</div>
+
+
+
 <h1><a href="/">Lists</a></h1>
 <div id="add-list" class="row">
 </div>
