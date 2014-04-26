@@ -11,7 +11,7 @@ var app = app || {};
 		initialize: function(){
 			_.bindAll(this,"render","adding","cancel","save","clearFields");	
 			this.listenTo(this.model,"change",this.render);	
-			this.listenTo(app.lists,"adding:list",this.adding);			
+			this.listenTo(app.lists,"adding:list",this.adding);				
 		},
 		render:function(){
 			this.$el.html(this.template(this.model.toJSON()));
@@ -31,7 +31,10 @@ var app = app || {};
 		save:function(e){
 			e.preventDefault();
 			var newList = new app.List({projectid:this.model.get("projectid"), name: this.$name.val(),description: this.$description.val()});			
-			this.collection.create(newList, {wait:true});				
+			//this.collection.create(newList, {wait:true});
+			//the model here is a list but I need to add new list to a project model's list collection
+			this.model.get("project").get("lists").create(newList, {wait:true});
+			app.lists.create(newList, {wait:true});		
 			this.$el.removeClass("adding");
 			this.clearFields();
 			this.$add.focus();

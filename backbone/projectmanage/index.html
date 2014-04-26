@@ -104,26 +104,27 @@
 
 
 <script type="text/template" id="lists-template">
-<div id="project-container">
+<div id="project-container" class="view-project">
 <h3> <%= name %> </h3>
 <p><%=description%></p>
 </div>
 
-<div class="col-md-6" >	
-<form class="edit-project form-vertical well">
+<div class="col-md-12" >	
+<form class="edit-project form-vertical">
 	<div class="form-group">
-	<label>Project Name</label>
+	<!--<label>Project Name</label>-->
 	<input class="name form-control" type="text" placeholder="enter project name" value='<%=name%>' />
 	</div>
 	
 	<div class="form-group">
-	<label>Project Description</label>
-	<textarea class="description form-control" rows="6" placeholder="enter description"><%=description%></textarea>
+	<!--<label>Project Description</label>-->
+	<textarea class="description form-control" rows="2" placeholder="enter description"><%=description%></textarea>
 	</div>
 	
-	<div class="form-group pull-right">
-	<button class="project-save btn btn-primary">Save</button>
-	<a class="cancel" >cancel</a>
+	<div class="form-group pull-left">
+	<button class="project-save btn">Rename project</button>
+	or
+	<a class="cancel" >Cancel</a>
 	</div>
 	<br class="clearfix"/>
 </form>

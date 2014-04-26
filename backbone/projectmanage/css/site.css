@@ -24,6 +24,20 @@
 	display:block;
 }
 
+form.edit-project{
+	margin-left: 0px;
+}
+
+/*
+form.edit-project  .form-control
+{
+	border-bottom: 1px dotted #ccc;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	box-shadow:none;
+}
+*/
 
 #lists, #projects{
 	margin: 30px;

@@ -18,7 +18,6 @@ app.Project = Backbone.Model.extend({
 	},
 	parse: function(data){       
 		if(!this.get('lists')){
-			//this.set('lists', new app.Lists());
 			return data;			
 		}
 		this.get('lists').reset(data.lists); 

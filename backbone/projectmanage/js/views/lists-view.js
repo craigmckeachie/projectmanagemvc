@@ -24,8 +24,7 @@ var app = app || {};
 			this.render();
 			
 		},		
-		render:function(){			
-						
+		render:function(){						
 			var addListView = new app.ListAddView({model:new app.List({projectid:this.model.id,project:this.model}),collection:app.lists});
 			addListView.render();			
 			return this;
@@ -47,6 +46,10 @@ var app = app || {};
 		},
 			
 		addOneList: function(list){			
+			//var foundList;
+			//_.findWhere(this.model.get("lists"), function(list){
+			//	foundList = list;
+			//});
 			var foundList = this.model.get("lists").findWhere({id:list.id});
 			if(!foundList){return;}
 			var view = new app.ListView({model:list});
