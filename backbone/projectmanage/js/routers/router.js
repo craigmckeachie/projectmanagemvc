@@ -14,7 +14,10 @@ var app = app || {};
 	},
 	showProjects:function(){
 		console.log("Show Projects requested.");
-		projectsView = new app.ProjectsView();
+		if(app.projectsView){
+			app.projectsView.close();
+		}
+		app.projectsView = new app.ProjectsView();
 	},
 	addingProject: function(){
 		console.log("Add Project requested.");		
@@ -31,7 +34,11 @@ var app = app || {};
 		project.collection = new app.Projects();
 		//this doesn't, why not?
 		//project.collection = app.projects;
-		listsView =new app.ListsView({model:project});		
+		
+		if(app.listsView){
+			app.listsView.close();
+		}
+		app.listsView =new app.ListsView({model:project});		
 	},	
 	addingList: function(){
 		console.log("Add List requested.");		

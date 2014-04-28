@@ -8,18 +8,22 @@ var app = app || {};
 		events:{"click #project-container":"editingProject",
 				"click .cancel":"cancelEditingProject",
 				"click .project-save":"saveProject",
+				"click #remove-project":"removeProject"
 				},
 		initialize: function(){
 			_.bindAll(this,"render","addOneList","addAllLists","editingProject","cancelEditingProject","saveProject");
 			this.$el.html(this.template(this.model.toJSON()));
 			this.$listList = this.$("#lists");
 			//this.$name = this.$(".name");
-			//this.$description = this.$(".description");	
-					
-			this.listenTo(this.model,"change",this.initialize);
+			//this.$description = this.$(".description");
 			
-			this.listenTo(app.lists,"reset",this.addAllLists);
+			this.listenTo(this.model,"change",this.initialize);			
+			
+			//shouldnt I fire this just for this.model.get("lists")
+			this.listenTo(app.lists,"reset",this.addAllLists);			
 			this.listenTo(app.lists,"add",this.addOneList);
+			
+			this.listenTo(this.model,"destroy",this.remove);	
 			app.lists.fetch({reset:true});			
 			this.render();
 			
@@ -41,15 +45,14 @@ var app = app || {};
 			this.model.set({name: this.$(".name").val(),description: this.$(".description").val()});						
 			this.model.save();
 			this.$el.removeClass("editing-project");
-			//this.$el.html(this.template(this.model.toJSON()));
-				
 		},
-			
-		addOneList: function(list){			
-			//var foundList;
-			//_.findWhere(this.model.get("lists"), function(list){
-			//	foundList = list;
-			//});
+		removeProject:function(event){
+			event.preventDefault();
+			this.model.destroy();
+			app.appRouter.navigate('',{ trigger: true });
+			//app.appRouter.navigate('');
+		},
+		addOneList: function(list){						
 			var foundList = this.model.get("lists").findWhere({id:list.id});
 			if(!foundList){return;}
 			var view = new app.ListView({model:list});
@@ -59,7 +62,10 @@ var app = app || {};
 			this.$listList.html('');
 			//this.model.get("lists").each(this.addOneList,this);
 			app.lists.each(this.addOneList,this);
-		}	
+		},
+		close:function(){
+			this.stopListening();
+		}
 	});
 
 })(jQuery);
