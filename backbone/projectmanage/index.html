@@ -63,7 +63,7 @@
 <script type="text/template" id="project-template">
 		
 	<div class="col-md-16 view-project">	
-	<h3><a href="#project/<%=id%>/lists" ><%=name%></a></h3>
+	<h3><a href="#project/<%=id%>/details" ><%=name%></a></h3>
 	<p><%=description%></p>	
 	</div>
 		
@@ -79,7 +79,7 @@
 </script>
 
 
-<script type="text/template" id="lists-template">
+<script type="text/template" id="project-details-template">
 <div id="project-container" class="view-project">
 <h3> <%= name %> </h3>
 <p><%=description%></p>
@@ -97,7 +97,7 @@
 	</div>
 	
 	<div class="form-group pull-left">
-	<button class="project-save btn">Rename project</button>
+	<button id="project-save" class="btn">Rename project</button>
 	or
 	<a class="cancel" >Cancel</a>
 	</div>
@@ -123,145 +123,14 @@
 
 </script>
 
-<script type="text/template"  id="list-add-template">
-	
-	<div class="col-md-6 view-list">	
-	<a class="btn btn-primary add pull-right" href="#project/<%= projectid%>/list/add" >Add List</a>
-	</div>
-	
-	<div class="col-md-6">
-	<form class="add-list form-vertical well">
-		<div class="form-group">
-		<label>List Name</label>
-		<input class="name form-control" type="text" placeholder="enter list name" value='<%=name%>' />
-		</div>
-		
-		<div class="form-group">
-		<label>List Description</label>
-		<textarea class="description form-control" rows="6" placeholder="enter description here"><%=description%></textarea>
-		</div>
-		<button class="list-save btn btn-primary">Save</button>
-		<a class="cancel" href="#project/<%=projectid%>/lists">cancel</a>
-	</form>
-	</div>
-	
-
-</script>
-
-
-<script type="text/template" id="list-template">
-		
-	<div class="col-md-6 view-list">	
-	<%=name%> 
-	<a class="edit" href="#project/<%=projectid%>/list/edit/<%=id%>">edit</a>
-	<a class="remove" href="#project/<%=projectid%>/lists/remove">remove</a>
-	</div>
-	
-	<div class="col-md-6" >	
-	<form class="edit-list form-vertical well">
-		<div class="form-group">
-		<label>List Name</label>
-		<input class="name form-control" type="text" placeholder="enter list name" value='<%=name%>' />
-		</div>
-		
-		<div class="form-group">
-		<label>List Description</label>
-		<textarea class="description form-control" rows="6" placeholder="enter description"><%=description%></textarea>
-		</div>
-		
-		<div class="form-group pull-right">
-		<button class="list-save btn btn-primary">Save</button>
-		<a class="cancel" href="#project/<%=projectid%>/list/view">cancel</a>
-		</div>
-		<br class="clearfix"/>
-	</form>
-	</div>
-	
-	<div class="add-todo-container" class="row">
-	
-	</div>
-	
-	<ul class="todo-list list-unstyled col-md-6">
-		
-	</ul>
-	
-		
-</script>
-
-<script type="text/template" id="todo-add-template">
-		
-	<div class="col-md-6 view-todo">	
-		<a class="btn btn-primary add pull-right" href='#todo/add/<%=list.id%>' >Add Item</a>
-	</div>
-	
-	<div class="col-md-6" >
-	
-		<form class="add-todo form-vertical well">
-		
-		
-		<div class="form-group">		
-		<textarea class="description form-control" rows="6" placeholder="what needs to get done"><%=description%></textarea>
-		</div>
-		
-		<div class="form-group pull-right">
-		<button class="todo-save btn btn-primary">Save</button>
-		<a class="cancel" href="#/todo/view">cancel</a>
-		</div>
-		<br class="clearfix"/>
-	</form>
-	
-	</div>
-		
-</script>
-
-<script type="text/template" id="todo-template">
-		
-	<div class="col-md-6 view-todo">
-		
-	<input class="completed " type="checkbox"  <%= completed ? "checked":"" %> />	
-	<%=description%> 
-	<a class="edit" href="#/todo/edit/<%=id%>">edit</a>
-	<a class="remove" href="#/todo/remove">remove</a>
-	</div>
-	
-	<div class="col-md-10" >	
-	
-	
-	<form class="edit-todo form-vertical well">
-		
-		
-		<div class="form-group">		
-		<textarea class="description form-control" rows="6" placeholder="what needs to get done"><%=description%></textarea>
-		</div>
-		
-		<div class="form-group pull-right">
-		<button class="todo-save btn btn-primary">Save</button>
-		<a class="cancel" href="#/todo/view">cancel</a>
-		</div>
-		<br class="clearfix"/>
-	</form>
-	</div>
-		
-</script>
-
 
 <script src="/js/libs/jquery/jquery-1.10.2.min.js"></script>
 <script src="/js/libs/underscore/underscore-min.js"></script>
 <script src="/js/libs/backbone/backbone.js"></script>
 <script type="text/javascript" src="/js/libs/backbone/backbone.localStorage.js"></script>
-<script src="js/models/user.js"></script>
-<script src="js/collections/users.js"></script>
-<script src="js/models/todo.js"></script>
-<script src="js/collections/todos.js"></script>
-<script src="js/models/list.js"></script>
-<script src="js/collections/lists.js"></script>
 <script src="js/models/project.js"></script>
 <script src="js/collections/projects.js"></script>
-<script src="js/views/todo-view.js"></script>
-<script src="js/views/todo-add-view.js"></script>
-<script src="js/views/list-view.js"></script>
-<script src="js/views/list-add-view.js"></script>
-<script src="js/views/lists-view.js"></script>
+<script src="js/views/project-details-view.js"></script>
 <script src="js/views/project-view.js"></script>
 <script src="js/views/project-add-view.js"></script>
 <script src="js/views/projects-view.js"></script>

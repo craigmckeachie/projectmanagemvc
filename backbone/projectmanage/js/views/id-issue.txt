@@ -1,8 +1,0 @@
-when add new project then save
-won't save and render again because it needs id to render
-render is called by collection add event which happens on collection.create() 
-but the internal implementation adds to collection before save so at the time add event calls addOneProject and render happens the model hasn't called save and doesn't have an id
-
-answer:
-instead of listening for add event fire own event added after you know the model has been saved and an id is available
-
