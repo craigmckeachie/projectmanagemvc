@@ -18,8 +18,7 @@ var app = app || {};
 	},	
 	showProjectDetails:function(projectid){
 		console.log("Show Project details requested.");
-		var project = app.projects.findWhere({id:projectid});		
-						
+		var project = app.projects.findWhere({id:projectid});								
 		if(app.projectDetailsView){			
 			app.projectDetailsView.model = project;
 			app.projectDetailsView.initialize();

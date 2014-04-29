@@ -11,10 +11,9 @@ var app = app || {};
 				"click #remove-project":"removeProject"
 				},
 		initialize: function(){
-			_.bindAll(this,"render","editingProject","cancelEditingProject","saveProject","removeProject");			
+			_.bindAll(this,"render","editingProject","cancelEditingProject","saveProject","removeProject","close");			
 			this.listenTo(this.model,"change",this.render);
-			this.listenTo(this.model,"destroy",this.close);						
-			//this.render();
+			this.listenTo(this.model,"destroy",this.close);									
 		},		
 		render:function(){												
 			this.$el.html(this.template(this.model.toJSON()));
@@ -43,6 +42,7 @@ var app = app || {};
 		},		
 		close:function(){
 			this.stopListening();
+			$(this).empty;	
 		}
 	});
 
