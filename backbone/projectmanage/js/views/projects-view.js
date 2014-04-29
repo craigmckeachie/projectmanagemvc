@@ -16,8 +16,7 @@ var app = app || {};
 		},
 		render:function(){
 			var addProjectView = new app.ProjectAddView({model:new app.Project(), collection: app.projects});
-			addProjectView.render();
-			
+			addProjectView.render();			
 			return this;
 		},		
 		addOneProject: function(project){

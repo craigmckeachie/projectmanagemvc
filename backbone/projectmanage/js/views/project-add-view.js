@@ -33,8 +33,7 @@ var app = app || {};
 			var newProject = new app.Project({name: this.$name.val(),description: this.$description.val()});			
 			this.collection.create(newProject, {wait:true});				
 			this.$el.removeClass("adding");
-			this.clearFields();
-			//this.$add.focus();
+			this.clearFields();			
 			app.appRouter.navigate('');
 		},
 		clearFields:function(){
