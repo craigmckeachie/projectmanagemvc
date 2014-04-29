@@ -32,8 +32,9 @@ var app = app || {};
 		//project.collection = app.projects;
 		
 		if(app.projectDetailsView){
-			app.projectDetailsView.close();
+			//app.projectDetailsView.close();
 			app.projectDetailsView.model = project;
+			app.projectDetailsView.initialize();
 		}else{
 			app.projectDetailsView =new app.ProjectDetailsView({model:project});
 		}
