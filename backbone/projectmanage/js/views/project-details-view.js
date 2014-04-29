@@ -11,10 +11,10 @@ var app = app || {};
 				"click #remove-project":"removeProject"
 				},
 		initialize: function(){
-			_.bindAll(this,"render","editingProject","cancelEditingProject","saveProject");			
+			_.bindAll(this,"render","editingProject","cancelEditingProject","saveProject","removeProject");			
 			this.listenTo(this.model,"change",this.render);
-			//this.listenTo(this.model,"destroy",this.remove);						
-			this.render();
+			this.listenTo(this.model,"destroy",this.close);						
+			//this.render();
 		},		
 		render:function(){												
 			this.$el.html(this.template(this.model.toJSON()));

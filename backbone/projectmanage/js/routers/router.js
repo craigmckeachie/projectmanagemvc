@@ -11,10 +11,8 @@ var app = app || {};
 	},
 	showProjects:function(){
 		console.log("Show Projects requested.");
-		if(app.projectsView){
-			app.projectsView.close();
-		}
-		app.projectsView = new app.ProjectsView();
+		new app.ProjectsView();	
+		//app.projectsView.render();
 	},
 	addingProject: function(){
 		console.log("Add Project requested.");
@@ -35,8 +33,12 @@ var app = app || {};
 		
 		if(app.projectDetailsView){
 			app.projectDetailsView.close();
+			app.projectDetailsView.model = project;
+		}else{
+			app.projectDetailsView =new app.ProjectDetailsView({model:project});
 		}
-		app.projectDetailsView =new app.ProjectDetailsView({model:project});		
+		
+		app.projectDetailsView.render();		
 	}	
 });
 
