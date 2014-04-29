@@ -10,9 +10,7 @@ var app = app || {};
 	},
 	showProjects:function(){
 		console.log("Show Projects requested.");
-		new app.ProjectsView();	
-		//app.projectsView.render(); //can't do this because creates two empty items b/c render only does add view
-		//could move template to index.html body?
+		new app.ProjectsView();			
 	},
 	addingProject: function(){
 		console.log("Add Project requested.");
