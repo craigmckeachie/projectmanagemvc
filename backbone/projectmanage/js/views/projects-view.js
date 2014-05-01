@@ -8,7 +8,7 @@ var app = app || {};
 		initialize: function(){
 			_.bindAll(this,"render","addOneProject","addAllProjects");			
 			this.$el.html(this.template());
-			this.$projectProject = this.$("#projects");			
+			this.$projectList = this.$("#projects");			
 			this.listenTo(app.projects,"reset",this.addAllProjects);			
 			this.listenTo(app.projects,"add",this.addOneProject);
 			
@@ -30,7 +30,7 @@ var app = app || {};
 		},
 		
 		addAllProjects: function(){
-			this.$projectProject.html('')
+			this.$projectList.html('')
 			app.projects.each(this.addOneProject,this);		
 		}	
 	});

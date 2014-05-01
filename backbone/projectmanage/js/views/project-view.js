@@ -34,7 +34,11 @@ var app = app || {};
 		},		
 		save:function(e){
 			e.preventDefault();
-			this.model.set({name: this.$name.val(),description: this.$description.val()});						
+			this.model.set({name: this.$name.val(),description: this.$description.val()});
+			if (!this.model.isValid()) {
+			  alert(this.model.validationError);
+			  return;
+			}	
 			this.model.save();
 			this.$el.removeClass("editing-project");
 			//this.$(".todo-project li").removeClass("editing-project");

@@ -7,6 +7,9 @@ app.Project = Backbone.Model.extend({
 		lists: []
 	},
 	initialize:function(){		
+		this.on("invalid",function(model,error){
+			console.log(error);			
+		});
 		//this.set('lists', new app.Lists(this.lists));
 		this.set('lists', new app.Lists(app.lists.where({projectid:this.get("id")})));
 		this.get('lists', function(list){
@@ -30,5 +33,10 @@ app.Project = Backbone.Model.extend({
 		});	
         delete data.lists;
         return data;
-    }
+    },
+	validate: function(attrs){	
+		if(!attrs.name){
+			return "Project Name is required.";
+		}
+     },
 });

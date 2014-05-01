@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Collection Example</title>	
+</head>
+<body>
+
+
+
+<script src="js/libs/jquery/jquery-1.10.2.min.js"></script>
+<script src="js/libs/underscore/underscore-min.js"></script>
+<script src="js/libs/backbone/backbone.js"></script>
+<script type="text/javascript" src="js/libs/backbone/backbone.localStorage.js"></script>
+<script type="text/javascript">
+	var app = app || {};
+
+	app.Project = Backbone.Model.extend({
+		defaults:{
+			name: '',
+			description:'',	
+			lists: []
+		},
+		initialize:function(){		
+			this.on("invalid",function(model,error){
+				console.log(error);			
+			});
+			
+		},
+		validate: function(attrs){	
+			if(!attrs.name){
+				return "Project Name is required.";
+			}
+		 },
+	});
+	
+	app.Projects = Backbone.Collection.extend({
+		model: app.Project,	
+		localStorage: new Backbone.LocalStorage("PersistedProjects"),			
+	});
+
+
+	(function(){
+		var project = new app.Project({name:'original project'});
+		console.log(project.toJSON());
+		
+		var projects = new app.Projects();
+		
+		//listen for project to be added
+		projects.on('add',function(project){
+			console.log('Added: ' + JSON.stringify(project.toJSON()));
+		});		
+		projects.add(project);
+		//Logs: Added: {"name":"original project","description":"","lists":[]}
+		
+		//listen for project name to change
+		projects.on('change:name', function(project){
+			console.log('Changed name to: ' + JSON.stringify(project.get("name")));
+		});		
+		project.set("name", "new project");
+		//Logs: Changed name to: "new project"
+		
+		//listen for project to be removed
+		projects.on('remove', function(project){
+			console.log('Removed: ' + JSON.stringify(project.toJSON()));			
+		});		
+		projects.remove(project);
+		//Logs: Removed: {"name":"new project","description":"","lists":[]}
+				
+		var project1 = new app.Project({name:'project 1'});
+		var project2 = new app.Project({name:'project 2'});
+		var project3 = new app.Project({name:'project 3'});
+		projects.add([project1, project2, project3]);
+		console.log('Collection now has: ' + projects.length + " items");
+		//Logs: Collection now has: 3 items
+		
+		//save two of them to persistence/localStorage
+		project1.save();
+		project2.save();
+		
+		//reload from persistence/localStorage
+		projects.fetch();		
+		console.log('Collection now has: ' + projects.length + " items");
+		//Logs: Collection now has: 2 items
+		
+		//removes all models from persistence/localStorage
+		project1.destroy();
+		project2.destroy();
+			
+	})()
+</script>
+
+</body>
+</html>

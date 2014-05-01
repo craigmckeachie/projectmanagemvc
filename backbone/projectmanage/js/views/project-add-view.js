@@ -29,7 +29,12 @@ var app = app || {};
 		},
 		save:function(e){
 			e.preventDefault();
+			
 			var newProject = new app.Project({name: this.$name.val(),description: this.$description.val()});			
+			if (!newProject.isValid()) {
+			  alert(newProject.validationError);
+			  return;
+			}
 			this.collection.create(newProject, {wait:true});				
 			this.$el.removeClass("adding");
 			this.clearFields();
