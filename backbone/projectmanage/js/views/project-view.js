@@ -29,8 +29,10 @@ var app = app || {};
 			this.$el.addClass("editing-project");
 			this.$name.focus();
 		},
-		cancel:function(){
+		cancel:function(e){
+			e.preventDefault();
 			this.$el.removeClass("editing-project");
+			app.appRouter.navigate('');
 		},		
 		save:function(e){
 			e.preventDefault();
@@ -41,8 +43,8 @@ var app = app || {};
 			}	
 			this.model.save();
 			this.$el.removeClass("editing-project");
-			//this.$(".todo-project li").removeClass("editing-project");
-			app.appRouter.navigate('/project/view');	
+			app.appRouter.navigate('');			
+			//app.appRouter.navigate('/project/view');	
 		},
 		clear:function(){
 			this.model.destroy();
