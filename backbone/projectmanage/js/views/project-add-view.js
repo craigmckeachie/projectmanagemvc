@@ -39,7 +39,7 @@ var app = app || {};
 			this.$el.removeClass("adding");
 			this.clearFields();
 			this.$add.focus();
-			app.appRouter.navigate('/project/view');
+			app.appRouter.navigate('');
 		},
 		clearFields:function(){
 			this.$name.val('');

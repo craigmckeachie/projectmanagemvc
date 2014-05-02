@@ -9,8 +9,7 @@ app.Project = Backbone.Model.extend({
 	initialize:function(){		
 		this.on("invalid",function(model,error){
 			console.log(error);			
-		});
-		//this.set('lists', new app.Lists(this.lists));
+		});		
 		this.set('lists', new app.Lists(app.lists.where({projectid:this.get("id")})));
 		this.get('lists', function(list){
 			list.project = this;
@@ -20,8 +19,7 @@ app.Project = Backbone.Model.extend({
 		});
 	},
 	parse: function(data){       
-		if(!this.get('lists')){
-			//this.set('lists', new app.Lists());
+		if(!this.get('lists')){			
 			return data;			
 		}
 		this.get('lists').reset(data.lists); 
