@@ -43,8 +43,7 @@ var app = app || {};
 			}	
 			this.model.save();
 			this.$el.removeClass("editing-project");
-			app.appRouter.navigate('');			
-			//app.appRouter.navigate('/project/view');	
+			app.appRouter.navigate('');						
 		},
 		clear:function(){
 			this.model.destroy();

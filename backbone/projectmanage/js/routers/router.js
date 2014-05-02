@@ -9,10 +9,7 @@ var app = app || {};
 		"project/edit/:id":"editingProject",
 		"project/:projectid/lists":"showLists",	
 		"project/:projectid/list/add":"addingList",
-		"project/:projectid/list/edit/:id":"editingList",
-		//"lists":"showLists",
-		//"list/add":"addingList",
-		//"list/edit/:id":"editingList",
+		"project/:projectid/list/edit/:id":"editingList",		
 		"todo/edit/:id":"editingTodo"
 	},
 	showProjects:function(){
@@ -26,11 +23,7 @@ var app = app || {};
 	editingProject: function(id){
 		console.log("Edit Project requested. id=" + id);
 		app.projects.trigger('editing:project',{id:id});	
-	},	
-	//showLists:function(){
-	//	console.log("Show Lists requested.");
-	//	listsView =new app.ListsView();
-	//},
+	},
 	showLists:function(projectid){
 		console.log("Show Lists requested.");
 		var project = app.projects.findWhere({id:projectid});
