@@ -3,7 +3,7 @@
   <h2>Projects <a class="action" ng-hide="addingProjectNow" href="#projects/add">Add a project</a></h2>
   
   <form ng-submit="add()" class="inline" ng-show="addingProjectNow">
-    <input focus-on="focusMeEvent" ng-model="newproject.name" placeholder="Give the project a name">
+    <input ng-model="newproject.name" auto-focus placeholder="Give the project a name">
 	<input ng-model="newproject.description" placeholder="Enter a description">
     <button>Save</button> or <a href="#/">cancel</a>
   </form>
@@ -20,7 +20,7 @@
 	</span>
 	
 	<form ng-submit="doneEditing(project)" class="inline project-form">
-        <input focus-on="focusMeEvent" ng-model="project.name">
+        <input ng-model="project.name" auto-focus>
 		<input ng-model="project.description">
         <button>Save</button> or <a href="" ng-click="revertEditing(project)">cancel</a>
     </form>

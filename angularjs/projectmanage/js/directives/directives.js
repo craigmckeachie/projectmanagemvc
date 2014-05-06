@@ -1,21 +1,13 @@
-app.directive('focusOn', function() {
-  return function(scope, elem, attr) {
-    scope.$on('focusOn', function(e, name) {
-      if (name === attr.focusOn) {
-        elem[0].focus();
-      }
-    });
-  };
+app.directive('autoFocus', function($timeout) {
+    return {
+        restrict: 'AC',
+        link: function(_scope, _element) {
+            $timeout(function(){
+                _element[0].focus();
+            }, 0);
+        }
+    };
 });
-
-app.factory('focus', function($rootScope, $timeout) {
-  return function(name) {
-    $timeout(function() {
-      $rootScope.$broadcast('focusOn', name);
-    });
-  };
-});
-
 
 app.directive('calendar', function() {
   return {

@@ -4,7 +4,7 @@
 <div class="sheet" ng-click="hideDialogs($event)">  
   <h2>To-do lists <a class="action" ng-hide="addingListNow" href="#projects/{{project.id}}/lists/add" >Add a to-do list</a></h2>
   <form ng-submit="addList()" class="inline" ng-show="addingListNow">
-    <input focus-on="focusMeEvent" ng-model="newlist.name" placeholder="Give the list a title">
+    <input ng-model="newlist.name" auto-focus placeholder="Give the list a title">
     <button>Save</button> or <a href="#projects/{{project.id}}/lists">cancel</a>
   </form>
     
@@ -20,7 +20,7 @@
 	{{list.name}}
 	</span>
 	<form ng-submit="doneEditingList(line)" class="inline list-form">
-        <input focus-on="focusListEditEvent" ng-model="list.name">
+        <input ng-model="list.name" auto-focus>
 		<input ng-model="list.description">
         <button>Save</button> or <a href="#projects/{{project.id}}/lists/">cancel</a>
     </form>
@@ -50,7 +50,7 @@
           </span>
         </span>
         <form ng-submit="doneEditing(todo,list)" class="inline todo-form">
-        <input ng-model="todo.description">
+        <input ng-model="todo.description" auto-focus>
         <button>Save</button> or <a href="" ng-click="revertEditing(todo,list)">cancel</a>
         </form>
       </li>
@@ -62,7 +62,7 @@
     
 	
     <form ng-submit="add(list)" class="adding" ng-show="list.addingTodo">
-    <input type="text" focus-on="focusMeEvent" placeholder="Add a new to-do" ng-model="list.newtodo.description" />
+    <input type="text" auto-focus placeholder="Add a new to-do" ng-model="list.newtodo.description" />
     <br />
     <button>Add this to-do</button>
     or
