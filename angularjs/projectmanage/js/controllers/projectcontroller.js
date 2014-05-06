@@ -1,5 +1,5 @@
 app.controller('ProjectListController',function($scope, ProjectService){
-	var projects = $scope.projects = ProjectService.get();	
+	$scope.projects = ProjectService.get();	
 });
 
 app.controller('ProjectAddController',function($scope, $location, ProjectService){
@@ -24,13 +24,13 @@ app.controller('ProjectEditController',function($scope, $location, $routeParams,
 	
 	$scope.doneEditing = function(project){
 		$scope.editedProject = null;
-		//delete blanks, trim
+		//trim
 		if(project.name){
 			project.name = project.name.trim();			 	
 		}
-		if(!project.name){
-			//todo: fix this
-			//$scope.remove(project);
+		//delete blanks
+		if(!project.name || project.name.length==0){			
+			ProjectService.remove(project);
 		}
 		$location.path('/');
 	};

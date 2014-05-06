@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('todoapp',[]);
+var app = angular.module('projectmanage',[]);
 
 app.config(function($routeProvider){
 	$routeProvider	
