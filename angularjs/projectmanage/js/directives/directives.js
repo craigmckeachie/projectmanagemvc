@@ -23,11 +23,7 @@ app.directive('calendar', function() {
             });
           }
         });
-      });
-
-      //ngModelCtrl.$render=function(){
-      //  element.datepicker('setDate',ngModelCtrl.$viewValue || '');
-      //};
+      });      
     }
   };
 });

@@ -9,6 +9,12 @@ App.Router.map(function() {
 });
 //multiple paths per route
 
+App.ApplicationRoute = Ember.Route.extend({
+	model: function(){
+		
+	}
+});
+
 App.ProjectsRoute = Ember.Route.extend({
   model: function() {
     return ['project a', 'project b', 'project c'];

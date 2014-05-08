@@ -38,7 +38,7 @@ app.controller('ProjectEditController',function($scope, $location, $routeParams,
 	$scope.revertEditing = function(project){		
 		projects[projects.indexOf(project)]  = $scope.originalProject;
 		$scope.doneEditing(project);
-		$location.path('/');
+		//$location.path('/');
 	}
 	
 });
