@@ -8,14 +8,13 @@
 </head>
 <body>
   <script type="text/x-handlebars">
-	<div class="sheet">
-	foo
+	<div class="sheet">	
     {{outlet}}
 	</div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="projects">
-	<h1>Projects</h1>
+	<h1>{{#link-to 'projects'}}Projects{{/link-to}}</h1>
 	
 	{{#unless addingProjectNow}}	
 		{{#link-to 'projects.add' }}
@@ -29,22 +28,33 @@
   
   <script type="text/x-handlebars" data-template-name="projects/add">
   
-	<form>
-    <input {{#bind-attr newproject.name}} placeholder="Give the project a name">
-	<input {{#bind-attr newproject.description}} placeholder="Enter a description">
-    <button>Save</button> or <a href="#/">cancel</a>
-  
-  </form>
+	<form>	
+	{{input type="text" value=newproject.name placeholder="Give the project a name" }}
+	{{input type="text" value=newproject.description placeholder="Enter a description" }}   
+	    
+	<button>Save</button> or <a href="#/">cancel</a>
+	</form>
 	
   </script>
   
   
-  <script type="text/x-handlebars" id="index">
+  <script type="text/x-handlebars" data-template-name="projects/index">
     <ul>
-    {{#each item in model}}
-      <li>{{item}}</li>
+    {{#each project in model}}
+      <li>		
+	   	   {{render 'project' project}} 	  
+	  </li>
     {{/each}}
     </ul>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="project">
+	  {{#if isEditing }}  
+			editing here!
+	   {{else}}			
+			<button {{action 'edit' project}} >edit</button>
+			{{project.name}}
+	   {{/if}}
   </script>
 
   <script src="js/libs/jquery-1.10.2.js"></script>
