@@ -36,6 +36,7 @@ App.ProjectsIndexRoute = Ember.Route.extend({
 
 App.ProjectController = Ember.ObjectController.extend({
   isEditing: false,
+  isDeleting: false,
   actions: {	
 	  edit: function() {
 		this.set('isEditing', true);
@@ -49,6 +50,18 @@ App.ProjectController = Ember.ObjectController.extend({
 		this.set('isEditing', false);
 		var project = this.get('model');
 		project.save();		
+	  },
+	  remove:function(){
+		this.set('isDeleting', true);
+	  },
+	  confirmDelete:function(){
+		this.set('isDeleting', false);
+		var project = this.get('model');
+		project.deleteRecord();
+		project.save();	
+	  },
+	  cancelDelete:function(){
+		this.set('isDeleting', false);			
 	  }
   }
 });

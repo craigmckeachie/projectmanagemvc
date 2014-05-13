@@ -59,7 +59,16 @@
 			</form>
 	   {{else}}			
 			<a  href="#" {{action 'edit' project}} >edit</a>
+			<a href="#" {{action 'remove' project}}>delete</a>
+			{{#if isDeleting}}
+			<div class="confirm-box">
+			  <h4>Are you sure you want to delete this item?</h4>
+			  <button {{action "confirmDelete"}}> yes </button>
+			  <button {{action "cancelDelete"}}> no </button>
+			</div>
+			{{/if}}
 			{{project.name}}
+			
 	   {{/if}}
   </script>
 
