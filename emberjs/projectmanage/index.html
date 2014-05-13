@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <script type="text/x-handlebars">
+  <script type="text/x-handlebars">	
 	<div class="sheet">	
     {{outlet}}
 	</div>
@@ -17,7 +17,7 @@
 	<h1>{{#link-to 'projects'}}Projects{{/link-to}}</h1>
 	
 	{{#unless addingProjectNow}}	
-		{{#link-to 'projects.add' }}
+		{{#link-to 'projects.create' }}
 		add project
 		{{/link-to}}	
 	{{/unless}}
@@ -26,7 +26,7 @@
 	<hr>	
   </script>
   
-  <script type="text/x-handlebars" data-template-name="projects/add">
+  <script type="text/x-handlebars" data-template-name="projects/create">
   
 	<form>	
 	{{input type="text" value=newproject.name placeholder="Give the project a name" }}
@@ -40,19 +40,25 @@
   
   <script type="text/x-handlebars" data-template-name="projects/index">
     <ul>
-    {{#each project in model}}
+    {{#each project in controller}}
       <li>		
 	   	   {{render 'project' project}} 	  
 	  </li>
+	 {{else}}
+	 No projects are available.
     {{/each}}
     </ul>
   </script>
   
   <script type="text/x-handlebars" data-template-name="project">
 	  {{#if isEditing }}  
-			editing here!
+			<form>	
+			{{input type="text" value=project.name placeholder="Give the project a name" }}
+			{{input type="text" value=project.description placeholder="Enter a description" }}				
+			<button {{action 'doneEditing' project}}>Save</button> or <a href="#" {{action 'cancelEditing' project}} >cancel</a>
+			</form>
 	   {{else}}			
-			<button {{action 'edit' project}} >edit</button>
+			<a  href="#" {{action 'edit' project}} >edit</a>
 			{{project.name}}
 	   {{/if}}
   </script>

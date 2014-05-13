@@ -34,7 +34,7 @@ border-radius: 3px;
 }
 
 
-ul li form {display:none;}
+/*ul li form {display:none;}*/
 
 ul li.editingproject form.project-form {display:block;} 
 ul li span.project-display {display:block;}

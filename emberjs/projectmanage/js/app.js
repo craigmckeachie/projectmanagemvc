@@ -11,13 +11,16 @@ var projects = [{
 App = Ember.Application.create();
 
 App.Router.map(function() {
-  this.resource('projects',{path: '/'},function(){	
-	this.route('add',{path: '/projects/add'});
-	//this.route('edit',{path: '/projects/edit/:project_id'});
-    //this.route('remove',{path: '/projects/remove/:project_id'});
+  this.resource('projects',{path: 'projects'},function(){	
+	this.route('create');
   });
 });
 
+App.IndexRoute = Ember.Route.extend({
+	redirect: function(){
+		this.transitionTo('projects');
+	}	
+});
 
 App.ProjectsIndexRoute = Ember.Route.extend({
   model: function() {
@@ -31,14 +34,20 @@ App.ProjectController = Ember.ObjectController.extend({
 	  edit: function() {
 		this.set('isEditing', true);
 	  },
+	  cancelEditing: function(){
+		//this.set('isEditing', false);
+		var project = this.get('model');
+		project.rollback();
+		this.send("doneEditing");
+	  },
 	  doneEditing: function() {
 		this.set('isEditing', false);
-		this.get('store').commit();
+		//this.get('store').commit();
 	  }
   }
 });
 
-App.ProjectsAddRoute = Ember.Route.extend({  
+App.ProjectsCreateRoute = Ember.Route.extend({  
   activate: function(){
 	this.controllerFor('projects').set('addingProjectNow', true);
   },
