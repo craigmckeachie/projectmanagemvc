@@ -35,7 +35,7 @@ App.ProjectsRoute = Ember.Route.extend({
 });
 
 App.ProjectsController = Ember.ArrayController.extend({
-	addingProject: false,
+	isAdding: false,
 });
 
 App.ProjectController = Ember.ObjectController.extend({
@@ -73,10 +73,10 @@ App.ProjectController = Ember.ObjectController.extend({
 
 App.ProjectsCreateRoute = Ember.Route.extend({    
   activate: function(){
-	this.controllerFor('projects').set('addingProject', true);
+	this.controllerFor('projects').set('isAdding', true);
   },
   deactivate: function(){
-	this.controllerFor('projects').set('addingProject', false);
+	this.controllerFor('projects').set('isAdding', false);
   }  
 });
 

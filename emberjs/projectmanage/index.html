@@ -16,7 +16,7 @@
   <script type="text/x-handlebars" data-template-name="projects">
 	<h1>{{#link-to 'projects'}}Projects{{/link-to}}</h1>
 	
-	{{#if addingProject}}
+	{{#if isAdding}}
 			{{outlet}}
 	{{else}}
 		{{#link-to 'projects.create' }}
