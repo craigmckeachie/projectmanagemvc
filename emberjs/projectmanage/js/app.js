@@ -67,6 +67,10 @@ App.ProjectController = Ember.ObjectController.extend({
 });
 
 App.ProjectsCreateRoute = Ember.Route.extend({  
+  model: function(){
+	//return Ember.Model.create('Project');
+	//return {}; //Em.Object.create({});
+  },
   activate: function(){
 	this.controllerFor('projects').set('addingProjectNow', true);
   },
@@ -79,6 +83,15 @@ App.ProjectsController = Ember.Controller.extend({
 	addingProjectNow : false,	
 });
 
-App.ProjectsAddController = Ember.Controller.extend({
-	
+App.ProjectsCreateController = Ember.Controller.extend({
+	actions: {
+		save: function(){
+			var newProject = this.store.createRecord('project', {name:this.get('newName'), description: this.get('newDescription')});			
+			newProject.save();
+			
+			this.set('newName','');
+			this.set('newDescription','');
+			this.transitionToRoute('projects');
+		}
+	}
 });

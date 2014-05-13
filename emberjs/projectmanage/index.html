@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Ember Starter Kit</title>
+  <title>Project Manage Application</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -22,17 +22,17 @@
 		{{/link-to}}	
 	{{/unless}}
 	
-	{{outlet}} 	
+	{{outlet}} 		
 	<hr>	
   </script>
   
   <script type="text/x-handlebars" data-template-name="projects/create">
   
 	<form>	
-	{{input type="text" value=newproject.name placeholder="Give the project a name" }}
-	{{input type="text" value=newproject.description placeholder="Enter a description" }}   
+	{{input type="text" value=newName placeholder="Give the project a name" }}
+	{{input type="text" value=newDescription placeholder="Enter a description" }}   
 	    
-	<button>Save</button> or <a href="#/">cancel</a>
+	<button {{action 'save'}}>Save</button> or <a href="#/">cancel</a>
 	</form>
 	
   </script>
@@ -76,8 +76,6 @@
   <script src="js/libs/handlebars-1.1.2.js"></script>
   <script src="js/libs/ember-1.4.0.js"></script>
   <script src="js/libs/ember-data.js"></script>
-  <script src="js/app.js"></script>
-  <!-- to activate the test runner, add the "?test" query string parameter -->
-  <script src="tests/runner.js"></script>
+  <script src="js/app.js"></script>  
 </body>
 </html>
