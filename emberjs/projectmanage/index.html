@@ -16,15 +16,23 @@
   <script type="text/x-handlebars" data-template-name="projects">
 	<h1>{{#link-to 'projects'}}Projects{{/link-to}}</h1>
 	
-	{{#if addingProjectNow }}
-			{{render project.create}}
+	{{#if addingProject}}
+			{{outlet}}
 	{{else}}
 		{{#link-to 'projects.create' }}
 		add project
 		{{/link-to}}	
 	{{/if}}
 	
-	{{outlet}}
+	<ul>
+	  {{#each project in controller}}
+      <li>		
+	   	   {{render 'project' project}} 	  
+	  </li>
+	  {{else}}
+			No projects are available.
+      {{/each}}
+    </ul>
 	
 	<hr>	
   </script>
@@ -38,19 +46,6 @@
 	<button {{action 'save'}}>Save</button> or {{#link-to 'projects'}}cancel {{/link-to}}
 	</form>
 	
-  </script>
-  
-  
-  <script type="text/x-handlebars" data-template-name="projects/index">
-    <ul>
-    {{#each project in controller}}
-      <li>		
-	   	   {{render 'project' project}} 	  
-	  </li>
-	 {{else}}
-	 No projects are available.
-    {{/each}}
-    </ul>
   </script>
   
   <script type="text/x-handlebars" data-template-name="project">

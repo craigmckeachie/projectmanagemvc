@@ -28,7 +28,7 @@ App.IndexRoute = Ember.Route.extend({
 	}	
 });
 
-App.ProjectsIndexRoute = Ember.Route.extend({
+App.ProjectsRoute = Ember.Route.extend({
   model: function() {
     return this.store.find('project');
   },     
@@ -66,21 +66,17 @@ App.ProjectController = Ember.ObjectController.extend({
   }
 });
 
-App.ProjectsCreateRoute = Ember.Route.extend({  
-  model: function(){
-	//return Ember.Model.create('Project');
-	//return {}; //Em.Object.create({});
-  },
+App.ProjectsCreateRoute = Ember.Route.extend({    
   activate: function(){
-	this.controllerFor('projects').set('addingProjectNow', true);
+	this.controllerFor('projects').set('addingProject', true);
   },
   deactivate: function(){
-	this.controllerFor('projects').set('addingProjectNow', false);
+	this.controllerFor('projects').set('addingProject', false);
   }  
 });
 
-App.ProjectsController = Ember.Controller.extend({
-	addingProjectNow : false,	
+App.ProjectsController = Ember.ArrayController.extend({
+	addingProject: false,
 });
 
 App.ProjectsCreateController = Ember.Controller.extend({
