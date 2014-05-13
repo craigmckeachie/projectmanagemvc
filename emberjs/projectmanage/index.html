@@ -16,13 +16,16 @@
   <script type="text/x-handlebars" data-template-name="projects">
 	<h1>{{#link-to 'projects'}}Projects{{/link-to}}</h1>
 	
-	{{#unless addingProjectNow}}	
+	{{#if addingProjectNow }}
+			{{render project.create}}
+	{{else}}
 		{{#link-to 'projects.create' }}
 		add project
 		{{/link-to}}	
-	{{/unless}}
+	{{/if}}
 	
-	{{outlet}} 		
+	{{outlet}}
+	
 	<hr>	
   </script>
   
@@ -32,7 +35,7 @@
 	{{input type="text" value=newName placeholder="Give the project a name" }}
 	{{input type="text" value=newDescription placeholder="Enter a description" }}   
 	    
-	<button {{action 'save'}}>Save</button> or <a href="#/">cancel</a>
+	<button {{action 'save'}}>Save</button> or {{#link-to 'projects'}}cancel {{/link-to}}
 	</form>
 	
   </script>
