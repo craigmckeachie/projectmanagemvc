@@ -72,10 +72,21 @@
   </script>
   
   <script type="text/x-handlebars" data-template-name="projects/detail">
-	<h1>Project Detail</h1>	
-	{{#link-to 'projects.detail.lists.create'}}add list{{/link-to}}
-	{{#link-to 'projects.detail.todos.create'}}add todo{{/link-to}}
-	{{outlet}}
+	<h1>Project Detail</h1>		
+			
+	{{#if isAddingList}}
+			{{outlet}}
+	{{else}}
+		{{#link-to 'projects.detail.lists.create'}}add list{{/link-to}}			
+	{{/if}}
+	
+	{{#if isAddingTodo}}
+			
+	{{else}}
+		{{#link-to 'projects.detail.todos.create'}}add todo{{/link-to}}				
+	{{/if}}	
+	
+	
   </script>
   
   <script type="text/x-handlebars" data-template-name="projects/detail/lists/create">
