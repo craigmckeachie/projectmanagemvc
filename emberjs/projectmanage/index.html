@@ -72,8 +72,22 @@
   </script>
   
   <script type="text/x-handlebars" data-template-name="projects/detail">
-	<h1>Project Detail</h1>
+	<h1>Project Detail</h1>	
+	{{#link-to 'projects.detail.lists.create'}}add list{{/link-to}}
+	{{#link-to 'projects.detail.todos.create'}}add todo{{/link-to}}
+	{{outlet}}
   </script>
+  
+  <script type="text/x-handlebars" data-template-name="projects/detail/lists/create">
+	<h1>Create List</h1>
+	
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="projects/detail/todos/create">
+	<h1>Create Todo</h1>
+  </script>
+  
+  
 
   <script src="js/libs/jquery-1.10.2.js"></script>
   <script src="js/libs/handlebars-1.1.2.js"></script>

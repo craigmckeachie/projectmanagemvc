@@ -6,19 +6,32 @@ App.ApplicationAdapter = DS.LSAdapter.extend({
 
 App.Project = DS.Model.extend({
   name: DS.attr( 'string' ),
-  description: DS.attr( 'string' )
+  description: DS.attr( 'string' ),
+  lists: DS.hasMany('list')
 });
 
+App.List = DS.Model.extend({
+  name: DS.attr( 'string' ),
+  description: DS.attr( 'string' ),
+  todos: DS.hasMany('todo'),
+  project: DS.belongsTo('project')
+});
+
+App.Todo = DS.Model.extend({  
+  description: DS.attr( 'string' ),
+  duedate: DS.attr( 'date' ),
+  assigneduser: DS.attr( 'string' ),
+  list: DS.belongsTo('list')
+});
 
 App.Router.map(function() {
   this.resource('projects', function(){	
-	this.route('create');
-	
+	this.route('create');	
   });
   
-  this.route('projects.detail', {path: "/projects/:project_id"},function(){
-		this.resource('lists.create',{path: "/lists/create"});
-		this.resource('todos.create',{path: "/todos/create"});
+  this.resource('projects.detail', {path: "/projects/:project_id"},function(){
+	this.route('lists.create',{path: "/lists/create"});
+	this.route('todos.create',{path: "/todos/create"});
   });
   
 });
@@ -26,6 +39,12 @@ App.Router.map(function() {
 App.ProjectDetailsRoute = Ember.Route.extend({
 	
 });
+
+/*
+App.ListsCreateRoute = Ember.Route.extend({
+	
+});
+*/
 
 App.IndexRoute = Ember.Route.extend({
 	redirect: function(){
