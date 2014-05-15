@@ -64,16 +64,21 @@
 			  <button {{action "confirmDelete"}}> yes </button>
 			  <button {{action "cancelDelete"}}> no </button>
 			</div>
-			{{/if}}
-			{{project.name}}
+			{{/if}}								
 			
+			{{project.name}}  
 	   {{/if}}
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="projects/detail">
+	<h1>Project Detail</h1>
   </script>
 
   <script src="js/libs/jquery-1.10.2.js"></script>
   <script src="js/libs/handlebars-1.1.2.js"></script>
   <script src="js/libs/ember-1.4.0.js"></script>
   <script src="js/libs/ember-data.js"></script>
+  <script src="js/libs/ember-data-localstorage-adapter.js"></script>
   <script src="js/app.js"></script>  
 </body>
 </html>

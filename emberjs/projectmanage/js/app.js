@@ -1,11 +1,15 @@
 App = Ember.Application.create();
-App.ApplicationAdapter = DS.FixtureAdapter;
+//App.ApplicationAdapter = DS.FixtureAdapter;
+App.ApplicationAdapter = DS.LSAdapter.extend({
+  namespace: 'projectmanage-funnyant'
+});
 
 App.Project = DS.Model.extend({
   name: DS.attr( 'string' ),
   description: DS.attr( 'string' )
 });
 
+/*
 App.Project.FIXTURES = [{
   id: '1',
   name: "First Project",
@@ -15,13 +19,26 @@ App.Project.FIXTURES = [{
   name: "Second Project",
   description: "A description of the second project.",   
 }];
+*/
 
 App.Router.map(function() {
-  this.resource('projects',{path: 'projects'},function(){	
+  this.resource('projects', function(){	
 	this.route('create');
+	
   });
+  /*
+  this.route('projects.detail', {path: "/projects/:project_id"},function(){
+		this.resource('lists.create',{path: "/lists/create"});
+		this.resource('todos.create',{path: "/todos/create"});
+  });
+  */
 });
 
+/*
+App.ProjectDetailsRoute = Ember.Route.extend({
+	
+});
+*/
 App.IndexRoute = Ember.Route.extend({
 	redirect: function(){
 		this.transitionTo('projects');
