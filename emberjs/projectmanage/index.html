@@ -66,35 +66,52 @@
 			</div>
 			{{/if}}								
 			
-			{{#link-to 'projects.detail' project}}  {{project.name}}  {{/link-to}}
+			{{#link-to 'projectsdetail' project}}  {{project.name}}  {{/link-to}}
 			
 	   {{/if}}
   </script>
   
-  <script type="text/x-handlebars" data-template-name="projects/detail">
+  <script type="text/x-handlebars" data-template-name="projectsdetail">
 	<h1>Project Detail</h1>		
-			
+	<h2>{{ project.name}}</h2>	
+	
 	{{#if isAddingList}}
 			{{outlet}}
 	{{else}}
-		{{#link-to 'projects.detail.lists.create'}}add list{{/link-to}}			
+		{{#link-to 'projectsdetail.lists.create'}}add list{{/link-to}}			
 	{{/if}}
 	
 	{{#if isAddingTodo}}
-			
+			{{outlet}}
 	{{else}}
-		{{#link-to 'projects.detail.todos.create'}}add todo{{/link-to}}				
-	{{/if}}	
-	
+		{{#link-to 'projectsdetail.todos.create'}}add todo{{/link-to}}				
+	{{/if}}
+
+	<ul>
+	  {{#each list in controller.lists}}
+      <li>		
+	   	   {{list.name}}	  
+	  </li>
+	  {{else}}
+			No lists are available.
+      {{/each}}
+    </ul>
 	
   </script>
   
-  <script type="text/x-handlebars" data-template-name="projects/detail/lists/create">
+  <script type="text/x-handlebars" data-template-name="projectsdetail/lists/create">
 	<h1>Create List</h1>
 	
+	<form>	
+	{{input type="text" value=newListName placeholder="Give the list a name" }}
+	{{input type="text" value=newListDescription placeholder="Enter a description" }}   
+	    
+	<button {{action 'save'}}>Save</button> or {{#link-to 'projectsdetail'}}cancel {{/link-to}}
+	</form>
+	
   </script>
   
-  <script type="text/x-handlebars" data-template-name="projects/detail/todos/create">
+  <script type="text/x-handlebars" data-template-name="projectsdetail/todos/create">
 	<h1>Create Todo</h1>
   </script>
   
