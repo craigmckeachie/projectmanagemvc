@@ -87,6 +87,8 @@ App.ProjectsdetailTodosCreateRoute = Ember.Route.extend({
 App.ListController = Ember.ObjectController.extend({
   isEditing: false,
   isDeleting: false,
+  needs: "projectsdetail",  
+  project: Ember.computed.alias("controllers.projectsdetail.model") ,
   actions: {	
 	  edit: function() {
 		this.set('isEditing', true);
@@ -105,10 +107,11 @@ App.ListController = Ember.ObjectController.extend({
 		this.set('isDeleting', true);
 	  },
 	  confirmDelete:function(){
-		this.set('isDeleting', false);
+		this.set('isDeleting', false);				
 		var list = this.get('model');
 		list.deleteRecord();
-		list.save();	
+		list.save();
+		project.save();
 	  },
 	  cancelDelete:function(){
 		this.set('isDeleting', false);			
