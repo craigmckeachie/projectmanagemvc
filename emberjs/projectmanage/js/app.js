@@ -84,6 +84,38 @@ App.ProjectsdetailTodosCreateRoute = Ember.Route.extend({
   }  
 });
 
+App.ListController = Ember.ObjectController.extend({
+  isEditing: false,
+  isDeleting: false,
+  actions: {	
+	  edit: function() {
+		this.set('isEditing', true);
+	  },
+	  cancelEditing: function(){		
+		var list = this.get('model');
+		list.rollback();
+		this.send("doneEditing");
+	  },
+	  doneEditing: function() {
+		this.set('isEditing', false);
+		var list = this.get('model');
+		list.save();		
+	  },
+	  remove:function(){
+		this.set('isDeleting', true);
+	  },
+	  confirmDelete:function(){
+		this.set('isDeleting', false);
+		var list = this.get('model');
+		list.deleteRecord();
+		list.save();	
+	  },
+	  cancelDelete:function(){
+		this.set('isDeleting', false);			
+	  }
+  }
+});
+
 App.IndexRoute = Ember.Route.extend({
 	redirect: function(){
 		this.transitionTo('projects');
@@ -131,7 +163,6 @@ App.ProjectController = Ember.ObjectController.extend({
 	  }
   }
 });
-
 
 App.ProjectsCreateRoute = Ember.Route.extend({    
   activate: function(){
