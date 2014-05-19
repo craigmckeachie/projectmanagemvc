@@ -37,102 +37,6 @@ App.Router.map(function() {
   
 });
 
-App.ProjectsdetailRoute = Ember.Route.extend({
-	isAddingList: false,
-	isAddingTodo: false,
-	model: function(params) {
-		return this.store.find('project', params.project_id);
-    },
-});
-
-App.ProjectsdetailListsCreateRoute = Ember.Route.extend({  
-  activate: function(){
-	this.controllerFor('projectsdetail').set('isAddingList', true);	
-  },
-  deactivate: function(){
-	this.controllerFor('projectsdetail').set('isAddingList', false);	
-  },  
-});
-
-App.ProjectsdetailListsCreateController = Ember.Controller.extend({
-	needs: 'projectsdetail',
-	actions: {
-		save: function(){			
-			var project = this.get('controllers.projectsdetail.model');
-			var newList = this.store.createRecord('list', {name:this.get('newListName'), description: this.get('newListDescription'), project: project});
-			newList.save();
-			
-			var lists = project.get('lists');
-            lists.pushObject(newList);
-            
-			newList.save();
-            project.save();
-			
-			this.set('newListName','');
-			this.set('newListDescription','');
-			this.transitionToRoute('projectsdetail');
-		}
-	}
-});
-
-App.ProjectsdetailTodosCreateRoute = Ember.Route.extend({    
-  activate: function(){	
-	this.controllerFor('projectsdetail').set('isAddingTodo', true);
-  },
-  deactivate: function(){	
-	this.controllerFor('projectsdetail').set('isAddingTodo', false);
-  }  
-});
-
-App.ListController = Ember.ObjectController.extend({
-  isEditing: false,
-  isDeleting: false,
-  needs: "projectsdetail",  
-  /*project: Ember.computed.alias("controllers.projectsdetail.model") ,*/
-  actions: {	
-	  edit: function() {
-		this.set('isEditing', true);
-	  },
-	  cancelEditing: function(){		
-		var list = this.get('model');
-		list.rollback();
-		this.send("doneEditing");
-	  },
-	  doneEditing: function() {
-		this.set('isEditing', false);
-		var list = this.get('model');
-		list.save();
-	  },
-	  remove:function(){
-		this.set('isDeleting', true);
-	  },
-	  confirmDelete:function(){
-		this.set('isDeleting', false);				
-		//var list = this.get('model');
-		//list.deleteRecord();
-		//list.save();
-		
-		var model = this.get('model');
-		model.eachRelationship(function(name, relationship){
-		if (relationship.kind === "belongsTo") {
-				var inverse = relationship.parentType.inverseFor(name);
-				var parent  = model.get(name);
-				if (inverse && parent) parent.get(inverse.name).removeObject(model);
-			}
-		});
-		this.get('model').deleteRecord();
-		this.get('model').save();
-		
-		
-		//var project = this.get("controllers.projectsdetail.model");
-		//project.save();
-	  },
-	  cancelDelete:function(){
-		this.set('isDeleting', false);			
-	  }
-  }
-});
-
 App.IndexRoute = Ember.Route.extend({
 	redirect: function(){
 		this.transitionTo('projects');
@@ -201,4 +105,103 @@ App.ProjectsCreateController = Ember.Controller.extend({
 			this.transitionToRoute('projects');
 		}
 	}
+});
+
+App.ProjectsdetailRoute = Ember.Route.extend({
+	isAddingList: false,
+	isAddingTodo: false,
+	model: function(params) {
+		return this.store.find('project', params.project_id);
+    },
+});
+
+App.ProjectsdetailListsCreateRoute = Ember.Route.extend({  
+  activate: function(){
+	this.controllerFor('projectsdetail').set('isAddingList', true);	
+  },
+  deactivate: function(){
+	this.controllerFor('projectsdetail').set('isAddingList', false);	
+  },  
+});
+
+App.ProjectsdetailListsCreateController = Ember.Controller.extend({
+	needs: 'projectsdetail',
+	actions: {
+		save: function(){			
+			var project = this.get('controllers.projectsdetail.model');
+			var newList = this.store.createRecord('list', {name:this.get('newListName'), description: this.get('newListDescription'), project: project});
+			newList.save();			
+			
+			var lists = project.get('lists');
+            lists.pushObject(newList);
+            project.save();
+			
+			this.set('newListName','');
+			this.set('newListDescription','');
+			this.transitionToRoute('projectsdetail');
+		}
+	}
+});
+
+App.ProjectsdetailTodosCreateRoute = Ember.Route.extend({    
+  activate: function(){	
+	this.controllerFor('projectsdetail').set('isAddingTodo', true);
+  },
+  deactivate: function(){	
+	this.controllerFor('projectsdetail').set('isAddingTodo', false);
+  }  
+});
+
+
+App.ListController = Ember.ObjectController.extend({
+  isEditing: false,
+  isDeleting: false,
+  needs: "projectsdetail",  
+  actions: {	
+	  edit: function() {
+		this.set('isEditing', true);
+	  },
+	  cancelEditing: function(){		
+		var list = this.get('model');
+		list.rollback();
+		this.send("doneEditing");
+	  },
+	  doneEditing: function() {
+		this.set('isEditing', false);
+		var list = this.get('model');
+		list.save();
+	  },
+	  remove:function(){
+		this.set('isDeleting', true);
+	  },
+	  confirmDelete:function(){
+		this.set('isDeleting', false);				
+		
+		/*
+		var list = this.get('model');
+		var project = this.get("controllers.projectsdetail.model");
+		project.get('lists').removeObject(list);
+		list.deleteRecord();		
+		list.save();
+		*/		
+			
+		
+		var model = this.get('model');
+		//project has many list clears it out
+		model.eachRelationship(function(name, relationship){
+		if (relationship.kind === "belongsTo") {
+				var inverse = relationship.parentType.inverseFor(name);
+				var parent  = model.get(name);
+				if (inverse && parent) parent.get(inverse.name).removeObject(model);
+			}
+		});
+		this.get('model').deleteRecord();
+		this.get('model').save();
+				
+		
+	  },
+	  cancelDelete:function(){
+		this.set('isDeleting', false);			
+	  }
+  }
 });
