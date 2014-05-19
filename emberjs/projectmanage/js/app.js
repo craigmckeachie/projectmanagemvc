@@ -130,7 +130,7 @@ App.ProjectsdetailListsCreateController = Ember.Controller.extend({
 		save: function(){			
 			var project = this.get('controllers.projectsdetail.model');
 			var newList = this.store.createRecord('list', {name:this.get('newListName'), description: this.get('newListDescription'), project: project});
-			newList.save();			
+			newList.save();
 			
 			var lists = project.get('lists');
             lists.pushObject(newList);
@@ -143,7 +143,7 @@ App.ProjectsdetailListsCreateController = Ember.Controller.extend({
 	}
 });
 
-App.ProjectsdetailTodosCreateRoute = Ember.Route.extend({    
+App.ProjectsdetailTodosCreateRoute = Ember.Route.extend({
   activate: function(){	
 	this.controllerFor('projectsdetail').set('isAddingTodo', true);
   },
@@ -177,27 +177,31 @@ App.ListController = Ember.ObjectController.extend({
 	  confirmDelete:function(){
 		this.set('isDeleting', false);				
 		
-		/*
+		
 		var list = this.get('model');
 		var project = this.get("controllers.projectsdetail.model");
 		project.get('lists').removeObject(list);
+		project.save();
 		list.deleteRecord();		
 		list.save();
-		*/		
+				
 			
-		
+		/*
 		var model = this.get('model');
 		//project has many list clears it out
 		model.eachRelationship(function(name, relationship){
 		if (relationship.kind === "belongsTo") {
 				var inverse = relationship.parentType.inverseFor(name);
 				var parent  = model.get(name);
-				if (inverse && parent) parent.get(inverse.name).removeObject(model);
+				if (inverse && parent){
+					parent.get(inverse.name).removeObject(model);
+					parent.save();
+				} 
 			}
 		});
 		this.get('model').deleteRecord();
 		this.get('model').save();
-				
+		*/		
 		
 	  },
 	  cancelDelete:function(){
