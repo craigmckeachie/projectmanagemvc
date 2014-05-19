@@ -175,8 +175,7 @@ App.ListController = Ember.ObjectController.extend({
 		this.set('isDeleting', true);
 	  },
 	  confirmDelete:function(){
-		this.set('isDeleting', false);				
-		
+		this.set('isDeleting', false);
 		
 		var list = this.get('model');
 		var project = this.get("controllers.projectsdetail.model");
@@ -184,25 +183,6 @@ App.ListController = Ember.ObjectController.extend({
 		project.save();
 		list.deleteRecord();		
 		list.save();
-				
-			
-		/*
-		var model = this.get('model');
-		//project has many list clears it out
-		model.eachRelationship(function(name, relationship){
-		if (relationship.kind === "belongsTo") {
-				var inverse = relationship.parentType.inverseFor(name);
-				var parent  = model.get(name);
-				if (inverse && parent){
-					parent.get(inverse.name).removeObject(model);
-					parent.save();
-				} 
-			}
-		});
-		this.get('model').deleteRecord();
-		this.get('model').save();
-		*/		
-		
 	  },
 	  cancelDelete:function(){
 		this.set('isDeleting', false);			
