@@ -59,7 +59,7 @@ App.ProjectsdetailListsCreateController = Ember.Controller.extend({
 	actions: {
 		save: function(){			
 			var project = this.get('controllers.projectsdetail.model');
-			var newList = this.store.createRecord('list', {name:this.get('newListName'), description: this.get('newListDescription')});			
+			var newList = this.store.createRecord('list', {name:this.get('newListName'), description: this.get('newListDescription'), project: project});
 			newList.save();
 			
 			var lists = project.get('lists');
@@ -88,7 +88,7 @@ App.ListController = Ember.ObjectController.extend({
   isEditing: false,
   isDeleting: false,
   needs: "projectsdetail",  
-  project: Ember.computed.alias("controllers.projectsdetail.model") ,
+  /*project: Ember.computed.alias("controllers.projectsdetail.model") ,*/
   actions: {	
 	  edit: function() {
 		this.set('isEditing', true);
@@ -101,17 +101,31 @@ App.ListController = Ember.ObjectController.extend({
 	  doneEditing: function() {
 		this.set('isEditing', false);
 		var list = this.get('model');
-		list.save();		
+		list.save();
 	  },
 	  remove:function(){
 		this.set('isDeleting', true);
 	  },
 	  confirmDelete:function(){
 		this.set('isDeleting', false);				
-		var list = this.get('model');
-		list.deleteRecord();
-		list.save();
-		project.save();
+		//var list = this.get('model');
+		//list.deleteRecord();
+		//list.save();
+		
+		var model = this.get('model');
+		model.eachRelationship(function(name, relationship){
+		if (relationship.kind === "belongsTo") {
+				var inverse = relationship.parentType.inverseFor(name);
+				var parent  = model.get(name);
+				if (inverse && parent) parent.get(inverse.name).removeObject(model);
+			}
+		});
+		this.get('model').deleteRecord();
+		this.get('model').save();
+		
+		
+		//var project = this.get("controllers.projectsdetail.model");
+		//project.save();
 	  },
 	  cancelDelete:function(){
 		this.set('isDeleting', false);			

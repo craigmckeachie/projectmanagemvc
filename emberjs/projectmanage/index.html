@@ -109,7 +109,7 @@
 			</form>
 	   {{else}}			
 			<a  href="#" {{action 'edit' list}} >edit</a>
-			<a href="#" {{action 'remove' list}}>delete</a>
+			<a href="#" {{action 'remove' list bubbles=false}}>delete</a>
 			{{list.name}}
 			
 			{{#if isDeleting}}
