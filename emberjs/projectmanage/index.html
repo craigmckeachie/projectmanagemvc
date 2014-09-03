@@ -82,12 +82,7 @@
 		{{#link-to 'projectsdetail.lists.create'}}add list{{/link-to}}			
 	{{/if}}
 	
-	{{#if isAddingTodo}}
-			{{outlet}}
-	{{else}}
-		{{#link-to 'projectsdetail.todos.create'}}add todo{{/link-to}}				
-	{{/if}}
-
+	
 	<ul>
 	  {{#each list in controller.lists}}
       <li>		
@@ -111,6 +106,12 @@
 			<a  href="#" {{action 'edit' list}} >edit</a>
 			<a href="#" {{action 'remove' list bubbles=false}}>delete</a>
 			{{list.name}}
+			
+			{{#if isAddingTodo}}
+				 adding
+			{{else}}
+				{{#link-to 'projectsdetail.todos.create' list }}add todo{{/link-to}}			
+			{{/if}}
 			
 			{{#if isDeleting}}
 			<div class="confirm-box">

@@ -32,7 +32,7 @@ App.Router.map(function() {
   
   this.resource('projectsdetail', {path: "/projects/:project_id"},function(){
 	this.route('lists.create',{path: "/lists/create"});
-	this.route('todos.create',{path: "/todos/create"});
+	this.route('todos.create',{path: "/lists/:list_id/todos/create"});
   });
   
 });
@@ -108,14 +108,19 @@ App.ProjectsCreateController = Ember.Controller.extend({
 });
 
 App.ProjectsdetailRoute = Ember.Route.extend({
-	isAddingList: false,
-	isAddingTodo: false,
+	//isAddingList: false,
+	//isAddingTodo: false,
 	model: function(params) {
 		return this.store.find('project', params.project_id);
     },
 });
 
-App.ProjectsdetailListsCreateRoute = Ember.Route.extend({  
+App.ProjectsdetailController = Ember.Controller.extend({
+	isAddingList: false,
+	isAddingTodo: false,
+});
+
+App.ProjectsdetailListsCreateRoute = Ember.Route.extend({ 
   activate: function(){
 	this.controllerFor('projectsdetail').set('isAddingList', true);	
   },
@@ -133,23 +138,19 @@ App.ProjectsdetailListsCreateController = Ember.Controller.extend({
 			newList.save();
 			
 			var lists = project.get('lists');
-            lists.pushObject(newList);
-            project.save();
+			lists.then(function(){
+				lists.pushObject(newList);
+				project.save();
+				
+				this.set('newListName','');
+				this.set('newListDescription','');
+				this.transitionToRoute('projectsdetail');
+			});
+            
 			
-			this.set('newListName','');
-			this.set('newListDescription','');
-			this.transitionToRoute('projectsdetail');
+			
 		}
 	}
-});
-
-App.ProjectsdetailTodosCreateRoute = Ember.Route.extend({
-  activate: function(){	
-	this.controllerFor('projectsdetail').set('isAddingTodo', true);
-  },
-  deactivate: function(){	
-	this.controllerFor('projectsdetail').set('isAddingTodo', false);
-  }  
 });
 
 
@@ -188,4 +189,33 @@ App.ListController = Ember.ObjectController.extend({
 		this.set('isDeleting', false);			
 	  }
   }
+});
+
+
+App.ProjectsdetailTodosCreateRoute = Ember.Route.extend({
+  activate: function(){	
+	this.controllerFor('projectsdetail').set('isAddingTodo', true);
+  },
+  deactivate: function(){	
+	this.controllerFor('projectsdetail').set('isAddingTodo', false);
+  }  
+});
+
+App.ProjectsdetailTodosCreateController = Ember.Controller.extend({
+	needs: 'projectsdetail',
+	actions: {
+		save: function(){			
+			//var project = this.get('controllers.projectsdetail.model');
+			//var newList = this.store.createRecord('list', {name:this.get('newListName'), description: this.get('newListDescription'), project: project});
+			//newList.save();
+			
+			//var lists = project.get('lists');
+            //lists.pushObject(newList);
+            //project.save();
+			
+			//this.set('newListName','');
+			//this.set('newListDescription','');
+			//this.transitionToRoute('projectsdetail');
+		}
+	}
 });
